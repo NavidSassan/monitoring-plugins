@@ -24,6 +24,15 @@ jobs:
       - name: cd $GITHUB_WORKSPACE
         run: cd $GITHUB_WORKSPACE
 
+      - name: cd $GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
+
+      - name: gem install fpm
+        run: gem install fpm
+
+      - name: fpm --version
+        run: fpm --version
+
       - name: Create a package
         run: |
           fpm \
