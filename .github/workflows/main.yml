@@ -1,0 +1,46 @@
+name: Build packages
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: cd $GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Create a package
+        run: |
+          fpm \
+          --input-type dir \
+          --name monitoring-plugins-$check \
+          --architecture noarch \
+          --license UNLICENSE \
+          --depends python3-psutil \
+          --depends linuxfabrik-lib \
+          --description 'todo' \
+          --url 'https://github.com/Linuxfabrik/monitoring-plugins' \
+          --maintainer 'Linuxfabrik GmbH <info (at) linuxfabrik (dot) ch>' \
+          --output-type $package \
+          --package build/monitoring-plugins-about-me-$version-noarch.$package \
+          --version $version \
+          check-plugins/$check/${check}3=/usr/lib64/nagios/plugins/$check
+        env:
+          package: rpm
+          version: 2022030201
+          check: about-me
