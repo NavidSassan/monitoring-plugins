@@ -27,8 +27,8 @@ jobs:
       - name: cd $GITHUB_WORKSPACE
         run: cd $GITHUB_WORKSPACE
 
-      - name: gem install fpm
-        run: gem install fpm
+      - name: sudo gem install fpm
+        run: sudo gem install fpm
 
       - name: fpm --version
         run: fpm --version
