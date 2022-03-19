@@ -33,6 +33,9 @@ jobs:
       - name: fpm --version
         run: fpm --version
 
+      - name: mkdir -p build
+        run: mkdir -p build
+
       - name: Create a package
         run: |
           fpm \
