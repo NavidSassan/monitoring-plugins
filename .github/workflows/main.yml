@@ -69,6 +69,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    if: startsWith(github.ref, 'refs/tags/')
+
     needs:
       - build
 
@@ -81,16 +83,12 @@ jobs:
           path: |
             build/*
 
-      - name: test
-        run: 'echo ${{ github.ref }}'
-
       - name: Get the tag name
         id: get_tag_name
         run: echo ::set-output name=tag_name::${GITHUB_REF/refs\/tags\//}
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           body: Release Notes at https://docs.linuxfabrik.ch/monitoring-plugins/${{ steps.get_tag_name.outputs.tag_name }}.html
           files: |
