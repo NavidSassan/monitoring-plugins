@@ -1,4 +1,4 @@
-name: Build packages
+name: 'Build packages, and optionally release on tags'
 
 # Controls when the workflow will run
 on:
@@ -57,17 +57,14 @@ jobs:
           version: 2022030201
           check: about-me
 
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   if: startsWith(github.ref, 'refs/tags/')
+  release:
+    runs-on: ubuntu-latest
+    steps:
 
-      - name: Pre-Release
+      - name: Release
         uses: softprops/action-gh-release@v1
-        if: "!startsWith(github.ref, 'refs/tags/')"
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: automatic pre-release
-          prerelease: True
           body: todo, body
           files: |
             build/*
-
