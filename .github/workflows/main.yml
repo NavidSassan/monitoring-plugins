@@ -89,3 +89,4 @@ jobs:
           body: Release Notes at https://docs.linuxfabrik.ch/monitoring-plugins/${{ github.ref }}.html
           files: |
             build/*
+
