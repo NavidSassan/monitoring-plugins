@@ -63,7 +63,7 @@ jobs:
 
       - name: Pre-Release
         uses: softprops/action-gh-release@v1
-        if: not startsWith(github.ref, 'refs/tags/')
+        if: "!startsWith(github.ref, 'refs/tags/')"
         with:
           name: automatic pre-release
           prerelease: True
