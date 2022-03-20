@@ -57,6 +57,13 @@ jobs:
           version: 2022030201
           check: about-me
 
+      - name: Archive packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: |
+            build/*
+
   release:
     runs-on: ubuntu-latest
     steps:
